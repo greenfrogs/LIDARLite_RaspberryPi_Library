@@ -1,15 +1,16 @@
-# LIDAR-Lite Raspberry Pi Library
+# MAC Challenge LIDAR-Lite Raspberry Pi Setup
 
-* [Product Page: LIDAR-Lite v3](https://buy.garmin.com/en-US/US/p/557294) - See product page for operating manual
-* [Product Support](https://support.garmin.com/) - Direct all support issues to Garmin's Support Team
+Installation guide for the LDIAR sensor in the MAC Challenge. Please follow the instrucitons below from Garmin first for enabling the I2C peripheral and wiring the LIDAR-Lite sensor before installing the script.
 
-This library provides quick access to basic functions of LIDAR-Lite
-via the Raspberry Pi platform. It has been tested on RPi 3 B+ running
-Raspbian kernel 4.14. Additionally, it can provide a user of any
-platform with a template for their own application code.
-
+1. Clone the repositoty: `git clone https://github.com/greenfrogs/LIDARLite_RaspberryPi_Library.git`
+2. Cd into the directory and build the code `cd LIDARLite_RaspberryPi_Library` and `make`
+3. Edit permissions on run.sh file so it can run `chmod +x run.sh`
+4. Run the application with `./run.sh` and try connecting in a webbrowser to the IP_ADDRESS:3000 (you can check the ip address on the pi with the command `ip a` and reading out the inet value for the eth0 adaptor)
+5. Check current directory name with `pwd` (needed for the next step)
+6. Set the application to begin on reboot by running `crontab -e` and then adding `@reboot /home/pi/LIDARLite_RaspberryPi_Library/run.sh` (instead of /home/pi/LIDARLite_RaspberryPi_Library use the output from the pwd command in the preivous step)
 
 ## Instructions to enable the I2C peripheral in the ARM core
+
 From a command shell, launch the configuration editor
 ```
 sudo raspi-config
