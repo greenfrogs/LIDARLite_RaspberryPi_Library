@@ -135,15 +135,14 @@ int main(int argc, char **argv)
             error("ERROR on accept");
 
         /* gethostbyaddr: determine who sent the message */
-        hostp = gethostbyaddr((const char *)&clientaddr.sin_addr.s_addr,
-                              sizeof(clientaddr.sin_addr.s_addr), AF_INET);
-        if (hostp == NULL)
-            error("ERROR on gethostbyaddr");
+        //hostp = gethostbyaddr((const char *)&clientaddr.sin_addr.s_addr,
+        //                      sizeof(clientaddr.sin_addr.s_addr), AF_INET);
+        //if (hostp == NULL)
+        //    error("ERROR on gethostbyaddr");
         hostaddrp = inet_ntoa(clientaddr.sin_addr);
         if (hostaddrp == NULL)
             error("ERROR on inet_ntoa\n");
-        printf("server established connection with %s (%s)\n",
-               hostp->h_name, hostaddrp);
+        printf("server established connection with %s \n", hostp->h_name, hostaddrp);
 
         /* write: echo the input string back to the client */
         myLidarLite.takeRange();
@@ -155,7 +154,8 @@ int main(int argc, char **argv)
         n = write(connfd, buf, strlen(buf));
         if (n < 0)
             error("ERROR writing to socket");
-        
+      
+        shutdown(connfd, SHUT_WR);
         close(connfd);
     }
 }
