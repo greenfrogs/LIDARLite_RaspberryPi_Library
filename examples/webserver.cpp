@@ -142,7 +142,7 @@ int main(int argc, char **argv)
         hostaddrp = inet_ntoa(clientaddr.sin_addr);
         if (hostaddrp == NULL)
             error("ERROR on inet_ntoa\n");
-        printf("server established connection with %s \n", hostp->h_name, hostaddrp);
+        printf("server established connection with %s\n", hostaddrp);
 
         /* write: echo the input string back to the client */
         myLidarLite.takeRange();
